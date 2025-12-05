@@ -657,7 +657,7 @@ function drawBrickSide(x, y, size, depth, brickColor, mortarColor) {
         } else {
             drawParametricPolygon(sidePoints, 0, 0.25, vStart, vEnd, brickColor);
             drawParametricPolygon(sidePoints, 0.25, 0.75, vStart, vEnd, brickColor);
-            drawParametricPolygon(sidePoints, 0. 75, 1, vStart, vEnd, brickColor);
+            drawParametricPolygon(sidePoints, 0.75, 1, vStart, vEnd, brickColor);
         }
     }
 }
@@ -717,3 +717,4 @@ function redrawScene() {
 
 // 初始化遊戲
 window.onload = init;
+
