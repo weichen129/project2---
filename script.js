@@ -1,6 +1,6 @@
 // 全局變數
 const canvas = document.getElementById('gameCanvas');
-const ctx = canvas. getContext('2d');
+const ctx = canvas.getContext('2d');
 const sizeSlider = document.getElementById('sizeSlider');
 const sizeValue = document.getElementById('sizeValue');
 const clearBtn = document.getElementById('clearBtn');
@@ -97,7 +97,7 @@ function drawCube(x, y, size) {
     ctx.lineTo(x, y - depth);
     ctx.lineTo(x + size, y - depth);
     ctx.lineTo(x + size + depth, y);
-    ctx. closePath();
+    ctx.closePath();
     ctx.fill();
     
     // 繪製側面
@@ -105,7 +105,7 @@ function drawCube(x, y, size) {
     ctx.beginPath();
     ctx.moveTo(x, y - depth);
     ctx.lineTo(x, y - depth + size);
-    ctx. lineTo(x + depth, y + size);
+    ctx.lineTo(x + depth, y + size);
     ctx.lineTo(x + depth, y);
     ctx.closePath();
     ctx.fill();
@@ -118,7 +118,7 @@ function drawCube(x, y, size) {
     ctx.lineWidth = 2;
     
     // 正面邊框
-    ctx. strokeRect(x + depth, y, size, size);
+    ctx.strokeRect(x + depth, y, size, size);
     
     // 頂面邊框
     ctx.beginPath();
@@ -132,7 +132,7 @@ function drawCube(x, y, size) {
     // 側面邊框
     ctx.beginPath();
     ctx.moveTo(x, y - depth);
-    ctx. lineTo(x, y - depth + size);
+    ctx.lineTo(x, y - depth + size);
     ctx.lineTo(x + depth, y + size);
     ctx.lineTo(x + depth, y);
     ctx.closePath();
@@ -251,12 +251,12 @@ function drawCubeBody(x, y, width, height) {
     ctx.lineTo(x, y - depth);
     ctx.lineTo(x + width, y - depth);
     ctx.lineTo(x + width + depth, y);
-    ctx. closePath();
+    ctx.closePath();
     ctx.fill();
     
     // 側面
     ctx.fillStyle = sideColor;
-    ctx. beginPath();
+    ctx.beginPath();
     ctx.moveTo(x, y - depth);
     ctx.lineTo(x, y - depth + height);
     ctx.lineTo(x + depth, y + height);
@@ -270,19 +270,19 @@ function drawCubeBody(x, y, width, height) {
     ctx.strokeRect(x + depth, y, width, height);
     
     ctx.beginPath();
-    ctx. moveTo(x + depth, y);
+    ctx.moveTo(x + depth, y);
     ctx.lineTo(x, y - depth);
     ctx.lineTo(x + width, y - depth);
     ctx.lineTo(x + width + depth, y);
-    ctx. closePath();
+    ctx.closePath();
     ctx.stroke();
     
     ctx.beginPath();
-    ctx. moveTo(x, y - depth);
+    ctx.moveTo(x, y - depth);
     ctx.lineTo(x, y - depth + height);
     ctx.lineTo(x + depth, y + height);
     ctx.lineTo(x + depth, y);
-    ctx. closePath();
+    ctx.closePath();
     ctx.stroke();
 }
 
@@ -306,26 +306,26 @@ function drawCubeArm(x, y, width, height, isLeft) {
     // 袖子頂面
     ctx.fillStyle = sleeveTopColor;
     ctx.beginPath();
-    ctx. moveTo(x + depth, y);
+    ctx.moveTo(x + depth, y);
     ctx.lineTo(x, y - depth);
     ctx.lineTo(x + width, y - depth);
     ctx.lineTo(x + width + depth, y);
-    ctx. closePath();
+    ctx.closePath();
     ctx.fill();
     
     // 袖子側面
-    ctx. fillStyle = sleeveSideColor;
+    ctx.fillStyle = sleeveSideColor;
     ctx.beginPath();
     ctx.moveTo(x, y - depth);
     ctx.lineTo(x, y - depth + sleeveHeight);
-    ctx. lineTo(x + depth, y + sleeveHeight);
+    ctx.lineTo(x + depth, y + sleeveHeight);
     ctx.lineTo(x + depth, y);
     ctx.closePath();
     ctx.fill();
     
     // 皮膚部分
     const skinY = y + sleeveHeight;
-    ctx. fillStyle = skinFrontColor;
+    ctx.fillStyle = skinFrontColor;
     ctx.fillRect(x + depth, skinY, width, height - sleeveHeight);
     
     ctx.fillStyle = skinSideColor;
@@ -338,14 +338,14 @@ function drawCubeArm(x, y, width, height, isLeft) {
     ctx.fill();
     
     // 邊框
-    ctx. strokeStyle = borderColor;
+    ctx.strokeStyle = borderColor;
     ctx.lineWidth = 2;
     ctx.strokeRect(x + depth, y, width, sleeveHeight);
     ctx.strokeRect(x + depth, skinY, width, height - sleeveHeight);
     
     ctx.beginPath();
     ctx.moveTo(x + depth, y);
-    ctx. lineTo(x, y - depth);
+    ctx.lineTo(x, y - depth);
     ctx.lineTo(x + width, y - depth);
     ctx.lineTo(x + width + depth, y);
     ctx.closePath();
@@ -357,7 +357,7 @@ function drawCubeArm(x, y, width, height, isLeft) {
     ctx.lineTo(x + depth, y + height);
     ctx.lineTo(x + depth, y);
     ctx.closePath();
-    ctx. stroke();
+    ctx.stroke();
 }
 
 // 繪製腿部 ✅ 修正版本
@@ -375,8 +375,8 @@ function drawCubeLeg(x, y, width, height, isLeft) {
     const shoeHeight = height / 3;
     
     // 褲子正面
-    ctx. fillStyle = pantsFrontColor;
-    ctx. fillRect(x + depth, y, width, pantsHeight);
+    ctx.fillStyle = pantsFrontColor;
+    ctx.fillRect(x + depth, y, width, pantsHeight);
     
     // 褲子頂面
     ctx.fillStyle = pantsTopColor;
@@ -394,7 +394,7 @@ function drawCubeLeg(x, y, width, height, isLeft) {
     ctx.moveTo(x, y - depth);
     ctx.lineTo(x, y - depth + pantsHeight);
     ctx.lineTo(x + depth, y + pantsHeight);
-    ctx. lineTo(x + depth, y);
+    ctx.lineTo(x + depth, y);
     ctx.closePath();
     ctx.fill();
     
@@ -410,7 +410,7 @@ function drawCubeLeg(x, y, width, height, isLeft) {
     ctx.lineTo(x, shoeY - depth);
     ctx.lineTo(x + width, shoeY - depth);
     ctx.lineTo(x + width + depth, shoeY);
-    ctx. closePath();
+    ctx.closePath();
     ctx.fill();
     
     // 鞋子側面
@@ -420,12 +420,12 @@ function drawCubeLeg(x, y, width, height, isLeft) {
     ctx.lineTo(x, shoeY - depth + shoeHeight);
     ctx.lineTo(x + depth, shoeY + shoeHeight);
     ctx.lineTo(x + depth, shoeY);
-    ctx. closePath();
+    ctx.closePath();
     ctx.fill();
     
     // 邊框
     ctx.strokeStyle = borderColor;
-    ctx. lineWidth = 2;
+    ctx.lineWidth = 2;
     ctx.strokeRect(x + depth, y, width, pantsHeight);
     ctx.strokeRect(x + depth, shoeY, width, shoeHeight);
     
@@ -438,19 +438,19 @@ function drawCubeLeg(x, y, width, height, isLeft) {
     ctx.stroke();
     
     ctx.beginPath();
-    ctx. moveTo(x, y - depth);
+    ctx.moveTo(x, y - depth);
     ctx.lineTo(x, y - depth + height);
     ctx.lineTo(x + depth, y + height);
     ctx.lineTo(x + depth, y);
     ctx.closePath();
-    ctx. stroke();
+    ctx.stroke();
 }
 
 // 創建磚塊立方體
 function createBrickCube(event) {
     const rect = canvas.getBoundingClientRect();
     const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect. top;
+    const mouseY = event.clientY - rect.top;
     
     let x = mouseX - brickSize / 2;
     let y = mouseY - brickSize / 2;
@@ -497,13 +497,13 @@ function drawBrickCube(x, y, size) {
     ctx.beginPath();
     ctx.moveTo(x + depth, y);
     ctx.lineTo(x, y - depth);
-    ctx. lineTo(x + size, y - depth);
+    ctx.lineTo(x + size, y - depth);
     ctx.lineTo(x + size + depth, y);
-    ctx. closePath();
+    ctx.closePath();
     ctx.stroke();
     
     // 側面邊框
-    ctx. beginPath();
+    ctx.beginPath();
     ctx.moveTo(x, y - depth);
     ctx.lineTo(x, y - depth + size);
     ctx.lineTo(x + depth, y + size);
@@ -557,7 +557,7 @@ function drawBrickFace(x, y, width, height, brickColor, mortarColor) {
             ctx.fillRect(x + quarterWidth + halfWidth, rowY, quarterWidth, rowHeight);
             
             // 分隔線
-            ctx. strokeStyle = mortarColor;
+            ctx.strokeStyle = mortarColor;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(x + quarterWidth, rowY);
@@ -569,11 +569,11 @@ function drawBrickFace(x, y, width, height, brickColor, mortarColor) {
         
         // 水平分隔線
         if (row > 0) {
-            ctx. strokeStyle = mortarColor;
+            ctx.strokeStyle = mortarColor;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(x, rowY);
-            ctx. lineTo(x + width, rowY);
+            ctx.lineTo(x + width, rowY);
             ctx.stroke();
         }
     }
@@ -591,12 +591,12 @@ function drawBrickTop(x, y, size, depth, brickColor, mortarColor) {
     
     // 繪製頂面背景
     ctx.fillStyle = mortarColor;
-    ctx. beginPath();
+    ctx.beginPath();
     ctx.moveTo(topPoints[0].x, topPoints[0].y);
     ctx.lineTo(topPoints[1].x, topPoints[1]. y);
     ctx.lineTo(topPoints[2].x, topPoints[2].y);
     ctx.lineTo(topPoints[3].x, topPoints[3].y);
-    ctx. closePath();
+    ctx.closePath();
     ctx.fill();
     
     const patterns = ['full', 'half', 'full', 'half'];
@@ -609,7 +609,7 @@ function drawBrickTop(x, y, size, depth, brickColor, mortarColor) {
         
         if (pattern === 'full') {
             // 左磚塊
-            drawParametricPolygon(topPoints, 0, 0. 5, vStart, vEnd, brickColor);
+            drawParametricPolygon(topPoints, 0, 0.5, vStart, vEnd, brickColor);
             // 右磚塊
             drawParametricPolygon(topPoints, 0.5, 1, vStart, vEnd, brickColor);
         } else {
@@ -639,7 +639,7 @@ function drawBrickSide(x, y, size, depth, brickColor, mortarColor) {
     ctx.moveTo(sidePoints[0].x, sidePoints[0].y);
     ctx.lineTo(sidePoints[1].x, sidePoints[1].y);
     ctx.lineTo(sidePoints[2].x, sidePoints[2].y);
-    ctx. lineTo(sidePoints[3].x, sidePoints[3].y);
+    ctx.lineTo(sidePoints[3].x, sidePoints[3].y);
     ctx.closePath();
     ctx.fill();
     
@@ -652,7 +652,7 @@ function drawBrickSide(x, y, size, depth, brickColor, mortarColor) {
         const vEnd = (row + 1) / 4;
         
         if (pattern === 'full') {
-            drawParametricPolygon(sidePoints, 0, 0. 5, vStart, vEnd, brickColor);
+            drawParametricPolygon(sidePoints, 0, 0.5, vStart, vEnd, brickColor);
             drawParametricPolygon(sidePoints, 0.5, 1, vStart, vEnd, brickColor);
         } else {
             drawParametricPolygon(sidePoints, 0, 0.25, vStart, vEnd, brickColor);
@@ -677,19 +677,19 @@ function drawParametricPolygon(points, uStart, uEnd, vStart, vEnd, color) {
     }
     
     ctx.fillStyle = color;
-    ctx. beginPath();
-    ctx.moveTo(vertexPoints[0]. x, vertexPoints[0]. y);
+    ctx.beginPath();
+    ctx.moveTo(vertexPoints[0].x, vertexPoints[0].y);
     for (let i = 1; i < vertexPoints.length; i++) {
         ctx.lineTo(vertexPoints[i].x, vertexPoints[i].y);
     }
-    ctx. closePath();
+    ctx.closePath();
     ctx.fill();
 }
 
 // 更新磚塊大小
 function updateSize() {
     brickSize = parseInt(sizeSlider.value);
-    sizeValue. textContent = brickSize;
+    sizeValue.textContent = brickSize;
 }
 
 // 清除所有磚塊
@@ -710,8 +710,8 @@ function redrawScene() {
     drawCharacter();
     
     // 重新繪製所有磚塊
-    brickCubes. forEach(cube => {
-        drawBrickCube(cube. x, cube.y, cube. size);
+    brickCubes.forEach(cube => {
+        drawBrickCube(cube.x, cube.y, cube.size);
     });
 }
 
