@@ -368,46 +368,55 @@ function drawCubeLeg(x, y, width, height, isLeft) {
     const pantsFrontColor = 'rgb(60, 90, 180)';
     const pantsTopColor = 'rgb(80, 110, 200)';
     const pantsSideColor = 'rgb(40, 70, 140)';
-    const shoeFrontColor = 'rgb(150, 150, 150)';
-    const shoeTopColor = 'rgb(170, 170, 170)';
     const patterns = ['full', 'half', 'full', 'half'];
-    
-    // 在頂面上繪製磚塊
-    for (let row = 0; row < 4; row++) {
-        const pattern = patterns[row];
 
-        // 計算磚塊在頂面上的位置（使用參數化座標）
-        for (let brick = 0; brick < (pattern === 'full' ? 2 : 3); brick++) {
-            // 計算磚塊在參數空間中的位置
-            let uStart, uEnd;
-            if (pattern === 'full') {
-                uStart = brick / 2;
-                uEnd = (brick + 1) / 2;
-            } else { // half pattern
-                if (brick === 0) { // 左半磚塊
-                    uStart = 0;
-                    uEnd = 0.25;
-                } else if (brick === 1) { // 中間完整磚塊
-                    uStart = 0.25;
-                    uEnd = 0.75;
-                } else { // 右半磚塊 (brick === 2)
-                    uStart = 0.75;
-                    uEnd = 1.0;
-                }
+// 在頂面上繪製磚塊
+for (let row = 0; row < 4; row++) {
+    const pattern = patterns[row];
+
+    // 計算磚塊在頂面上的位置（使用參數化座標）
+    for (let brick = 0; brick < (pattern === 'full' ? 2 : 3); brick++) {
+        // 計算磚塊在參數空間中的位置
+        let uStart, uEnd;
+        if (pattern === 'full') {
+            uStart = brick / 2;
+            uEnd = (brick + 1) / 2;
+        } else { // half pattern
+            if (brick === 0) { // 左半磚塊
+                uStart = 0;
+                uEnd = 0.25;
+            } else if (brick === 1) { // 中間完整磚塊
+                uStart = 0.25;
+                uEnd = 0.75;
+            } else { // 右半磚塊 (brick === 2)
+                uStart = 0.75;
+                uEnd = 1.0;
             }
+        }
 
-            const vStart = row / 4;
-            const vEnd = (row + 1) / 4;
+        const vStart = row / 4;
+        const vEnd = (row + 1) / 4;
 
-            // 計算四個頂點
-            const points = [];
-            for (const [u, v] of [[uStart, vStart], [uEnd, vStart], [uEnd, vEnd], [uStart, vEnd]]) {
-                // 使用雙線性插值計算頂面座標
-                const px = (1-u)*(1-v)*topPoints[1].x + u*(1-v)*topPoints[2].x + u*v*topPoints[3].x + (1-u)*v*topPoints[0].x;
-                const py = (1-u)*(1-v)*topPoints[1].y + u*(1-v)*topPoints[2].y + u*v*topPoints[3].y + (1-u)*v*topPoints[0].y;
-                points.push({x: px, y: py});
-            }
+        // 計算四個頂點
+        const points = [];
+        for (const [u, v] of [[uStart, vStart], [uEnd, vStart], [uEnd, vEnd], [uStart, vEnd]]) {
+            // 使用雙線性插值計算頂面座標
+            const px = (1-u)*(1-v)*topPoints[1].x + u*(1-v)*topPoints[2].x + u*v*topPoints[3].x + (1-u)*v*topPoints[0].x;
+            const py = (1-u)*(1-v)*topPoints[1].y + u*(1-v)*topPoints[2].y + u*v*topPoints[3].y + (1-u)*v*topPoints[0].y;
+            points.push({x: px, y: py});
+        }
 
+        // 繪製磚塊
+        ctx.fillStyle = brickColor;
+        ctx.beginPath();
+        ctx.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length; i++) {
+            ctx.lineTo(points[i].x, points[i].y);
+        }
+        ctx.closePath();
+        ctx.fill();
+    }
+}
             // 繪製磚塊
             ctx.fillStyle = brickColor;
             ctx.beginPath();
@@ -751,3 +760,4 @@ function redrawScene() {
 
 // 初始化遊戲
 window.onload = init;
+
