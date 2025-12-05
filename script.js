@@ -451,13 +451,20 @@ function createBrickCube(event) {
     const rect = canvas.getBoundingClientRect();
     const mouseX = event.clientX - rect.left;
     const mouseY = event.clientY - rect.top;
-    
-    let x = mouseX - brickSize / 2;
+
+    const depth = brickSize / 3; // 3D 深度
+    let x = mouseX - brickSize/2 - depth;
     let y = mouseY - brickSize / 2;
     
     // 確保不會超出邊界
-    x = Math.max(10, Math.min(x, canvas.width - brickSize - 10));
-    y = Math.max(10, Math.min(y, canvas.height - brickSize - 10));
+    // 考慮完整的 3D 物體範圍
+    const minX = 10 - depth;
+    const maxX = canvas.width - brickSize - 10;
+    const minY = 10 - depth;
+    const maxY = canvas.height - brickSize - 10;
+    
+    x = Math.max(minX, Math.min(x, maxX));
+    y = Math.max(minY, Math.min(y, maxY));
     
     // 繪製磚塊立方體
     drawBrickCube(x, y, brickSize);
@@ -717,4 +724,5 @@ function redrawScene() {
 
 // 初始化遊戲
 window.onload = init;
+
 
