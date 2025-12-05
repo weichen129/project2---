@@ -449,29 +449,32 @@ function drawCubeLeg(x, y, width, height, isLeft) {
 // 創建磚塊立方體
 function createBrickCube(event) {
     const rect = canvas.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
+
+    // ⭐ 必加：縮放比例（顯示大小 → 內部座標）
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    const mouseX = (event.clientX - rect.left) * scaleX;
+    const mouseY = (event.clientY - rect.top) * scaleY;
 
     const depth = brickSize / 3; // 3D 深度
-    let x = mouseX - brickSize/2;
-    let y = mouseY;
-    
-    // 確保不會超出邊界
-    // 考慮完整的 3D 物體範圍
+    let x = mouseX - brickSize / 2 - depth;
+    let y = mouseY - brickSize / 2;
+
+    // 邊界處理
     const minX = 10 - depth;
     const maxX = canvas.width - brickSize - 10;
     const minY = 10 - depth;
     const maxY = canvas.height - brickSize - 10;
-    
+
     x = Math.max(minX, Math.min(x, maxX));
     y = Math.max(minY, Math.min(y, maxY));
-    
-    // 繪製磚塊立方體
+
     drawBrickCube(x, y, brickSize);
-    
-    // 儲存磚塊資訊
-    brickCubes.push({x, y, size: brickSize});
+
+    brickCubes.push({ x, y, size: brickSize });
 }
+
 
 // 繪製磚塊立方體
 function drawBrickCube(x, y, size) {
@@ -724,6 +727,7 @@ function redrawScene() {
 
 // 初始化遊戲
 window.onload = init;
+
 
 
 
