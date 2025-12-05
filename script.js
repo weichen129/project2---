@@ -1,6 +1,6 @@
 // 全局變數
 const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
+const ctx = canvas. getContext('2d');
 const sizeSlider = document.getElementById('sizeSlider');
 const sizeValue = document.getElementById('sizeValue');
 const clearBtn = document.getElementById('clearBtn');
@@ -40,7 +40,7 @@ function drawBackground() {
     ctx.fillStyle = '#646464';
     ctx.font = '14px Arial';
     ctx.fillText('HI, I am Steve, just a simple Minecraft character, from student\'s simple homework', 30, 80);
-    ctx.fillText('I love building something, just like coder and bee. Click anywhere to create brick cubes!', 30, 100);
+    ctx.fillText('I love building something, just like coder and bee.  Click anywhere to create brick cubes!', 30, 100);
 }
 
 // 繪製角色
@@ -70,7 +70,7 @@ function drawCharacter() {
     // 4. 身體
     drawCubeBody(centerX - bodyWidth / 2, centerY - 140, bodyWidth, bodyHeight);
     
-    // 5. 左手
+    // 5.  左手
     drawCubeArm(centerX - bodyWidth / 2 - armWidth + 5, centerY - 140, armWidth, armHeight, true);
     
     // 6. 頭 (最上層)
@@ -97,7 +97,7 @@ function drawCube(x, y, size) {
     ctx.lineTo(x, y - depth);
     ctx.lineTo(x + size, y - depth);
     ctx.lineTo(x + size + depth, y);
-    ctx.closePath();
+    ctx. closePath();
     ctx.fill();
     
     // 繪製側面
@@ -105,7 +105,7 @@ function drawCube(x, y, size) {
     ctx.beginPath();
     ctx.moveTo(x, y - depth);
     ctx.lineTo(x, y - depth + size);
-    ctx.lineTo(x + depth, y + size);
+    ctx. lineTo(x + depth, y + size);
     ctx.lineTo(x + depth, y);
     ctx.closePath();
     ctx.fill();
@@ -118,7 +118,7 @@ function drawCube(x, y, size) {
     ctx.lineWidth = 2;
     
     // 正面邊框
-    ctx.strokeRect(x + depth, y, size, size);
+    ctx. strokeRect(x + depth, y, size, size);
     
     // 頂面邊框
     ctx.beginPath();
@@ -132,7 +132,7 @@ function drawCube(x, y, size) {
     // 側面邊框
     ctx.beginPath();
     ctx.moveTo(x, y - depth);
-    ctx.lineTo(x, y - depth + size);
+    ctx. lineTo(x, y - depth + size);
     ctx.lineTo(x + depth, y + size);
     ctx.lineTo(x + depth, y);
     ctx.closePath();
@@ -251,12 +251,12 @@ function drawCubeBody(x, y, width, height) {
     ctx.lineTo(x, y - depth);
     ctx.lineTo(x + width, y - depth);
     ctx.lineTo(x + width + depth, y);
-    ctx.closePath();
+    ctx. closePath();
     ctx.fill();
     
     // 側面
     ctx.fillStyle = sideColor;
-    ctx.beginPath();
+    ctx. beginPath();
     ctx.moveTo(x, y - depth);
     ctx.lineTo(x, y - depth + height);
     ctx.lineTo(x + depth, y + height);
@@ -270,29 +270,27 @@ function drawCubeBody(x, y, width, height) {
     ctx.strokeRect(x + depth, y, width, height);
     
     ctx.beginPath();
-    ctx.moveTo(x + depth, y);
+    ctx. moveTo(x + depth, y);
     ctx.lineTo(x, y - depth);
     ctx.lineTo(x + width, y - depth);
     ctx.lineTo(x + width + depth, y);
-    ctx.closePath();
+    ctx. closePath();
     ctx.stroke();
     
     ctx.beginPath();
-    ctx.moveTo(x, y - depth);
+    ctx. moveTo(x, y - depth);
     ctx.lineTo(x, y - depth + height);
     ctx.lineTo(x + depth, y + height);
     ctx.lineTo(x + depth, y);
-    ctx.closePath();
+    ctx. closePath();
     ctx.stroke();
 }
 
-// 繪製手臂
+// 繪製手臂 ✅ 修正版本
 function drawCubeArm(x, y, width, height, isLeft) {
-    // 滑鼠點擊位置作為立方體中心 (根據Python原版邏輯調整)
-    const depth = brickSize / 3; // 3D透視深度
-    let x = mouseX - brickSize / 2 - depth / 2;
-    let y = mouseY - brickSize / 2 + depth / 2;
+    const depth = width / 3;
     const skinTopColor = 'rgb(220, 173, 137)';
+    const skinFrontColor = 'rgb(235, 190, 150)';
     const skinSideColor = 'rgb(180, 130, 100)';
     const sleeveFrontColor = 'rgb(0, 170, 170)';
     const sleeveTopColor = 'rgb(0, 190, 190)';
@@ -308,26 +306,26 @@ function drawCubeArm(x, y, width, height, isLeft) {
     // 袖子頂面
     ctx.fillStyle = sleeveTopColor;
     ctx.beginPath();
-    ctx.moveTo(x + depth, y);
+    ctx. moveTo(x + depth, y);
     ctx.lineTo(x, y - depth);
     ctx.lineTo(x + width, y - depth);
     ctx.lineTo(x + width + depth, y);
-    ctx.closePath();
+    ctx. closePath();
     ctx.fill();
     
     // 袖子側面
-    ctx.fillStyle = sleeveSideColor;
+    ctx. fillStyle = sleeveSideColor;
     ctx.beginPath();
     ctx.moveTo(x, y - depth);
     ctx.lineTo(x, y - depth + sleeveHeight);
-    ctx.lineTo(x + depth, y + sleeveHeight);
+    ctx. lineTo(x + depth, y + sleeveHeight);
     ctx.lineTo(x + depth, y);
     ctx.closePath();
     ctx.fill();
     
     // 皮膚部分
     const skinY = y + sleeveHeight;
-    ctx.fillStyle = skinFrontColor;
+    ctx. fillStyle = skinFrontColor;
     ctx.fillRect(x + depth, skinY, width, height - sleeveHeight);
     
     ctx.fillStyle = skinSideColor;
@@ -340,14 +338,14 @@ function drawCubeArm(x, y, width, height, isLeft) {
     ctx.fill();
     
     // 邊框
-    ctx.strokeStyle = borderColor;
+    ctx. strokeStyle = borderColor;
     ctx.lineWidth = 2;
     ctx.strokeRect(x + depth, y, width, sleeveHeight);
     ctx.strokeRect(x + depth, skinY, width, height - sleeveHeight);
     
     ctx.beginPath();
     ctx.moveTo(x + depth, y);
-    ctx.lineTo(x, y - depth);
+    ctx. lineTo(x, y - depth);
     ctx.lineTo(x + width, y - depth);
     ctx.lineTo(x + width + depth, y);
     ctx.closePath();
@@ -359,82 +357,75 @@ function drawCubeArm(x, y, width, height, isLeft) {
     ctx.lineTo(x + depth, y + height);
     ctx.lineTo(x + depth, y);
     ctx.closePath();
-    ctx.stroke();
+    ctx. stroke();
 }
 
-// 繪製腿部
+// 繪製腿部 ✅ 修正版本
 function drawCubeLeg(x, y, width, height, isLeft) {
     const depth = width / 3;
     const pantsFrontColor = 'rgb(60, 90, 180)';
     const pantsTopColor = 'rgb(80, 110, 200)';
     const pantsSideColor = 'rgb(40, 70, 140)';
-    const patterns = ['full', 'half', 'full', 'half'];
-
-// 在頂面上繪製磚塊
-for (let row = 0; row < 4; row++) {
-    const pattern = patterns[row];
-
-    // 計算磚塊在頂面上的位置（使用參數化座標）
-    for (let brick = 0; brick < (pattern === 'full' ? 2 : 3); brick++) {
-        // 計算磚塊在參數空間中的位置
-        let uStart, uEnd;
-        if (pattern === 'full') {
-            uStart = brick / 2;
-            uEnd = (brick + 1) / 2;
-        } else { // half pattern
-            if (brick === 0) { // 左半磚塊
-                uStart = 0;
-                uEnd = 0.25;
-            } else if (brick === 1) { // 中間完整磚塊
-                uStart = 0.25;
-                uEnd = 0.75;
-            } else { // 右半磚塊 (brick === 2)
-                uStart = 0.75;
-                uEnd = 1.0;
-            }
-        }
-
-        const vStart = row / 4;
-        const vEnd = (row + 1) / 4;
-
-        // 計算四個頂點
-        const points = [];
-        for (const [u, v] of [[uStart, vStart], [uEnd, vStart], [uEnd, vEnd], [uStart, vEnd]]) {
-            // 使用雙線性插值計算頂面座標
-            const px = (1-u)*(1-v)*topPoints[1].x + u*(1-v)*topPoints[2].x + u*v*topPoints[3].x + (1-u)*v*topPoints[0].x;
-            const py = (1-u)*(1-v)*topPoints[1].y + u*(1-v)*topPoints[2].y + u*v*topPoints[3].y + (1-u)*v*topPoints[0].y;
-            points.push({x: px, y: py});
-        }
-
-        // 繪製磚塊
-        ctx.fillStyle = brickColor;
-        ctx.beginPath();
-        ctx.moveTo(points[0].x, points[0].y);
-        for (let i = 1; i < points.length; i++) {
-            ctx.lineTo(points[i].x, points[i].y);
-        }
-        ctx.closePath();
-        ctx.fill();
-    }
-}
-            // 繪製磚塊
-            ctx.fillStyle = brickColor;
-            ctx.beginPath();
-            ctx.moveTo(points[0].x, points[0].y);
-            for (let i = 1; i < points.length; i++) {
-                ctx.lineTo(points[i].x, points[i].y);
-            }
-            ctx.closePath();
-            ctx.fill();
-        }
-    }
-    ctx.lineTo(x + depth, shoeY);
+    const shoeFrontColor = 'rgb(30, 30, 30)';
+    const shoeTopColor = 'rgb(50, 50, 50)';
+    const shoeSideColor = 'rgb(20, 20, 20)';
+    const borderColor = 'rgb(0, 60, 120)';
+    
+    const pantsHeight = height * 2 / 3;
+    const shoeHeight = height / 3;
+    
+    // 褲子正面
+    ctx. fillStyle = pantsFrontColor;
+    ctx. fillRect(x + depth, y, width, pantsHeight);
+    
+    // 褲子頂面
+    ctx.fillStyle = pantsTopColor;
+    ctx.beginPath();
+    ctx.moveTo(x + depth, y);
+    ctx.lineTo(x, y - depth);
+    ctx.lineTo(x + width, y - depth);
+    ctx.lineTo(x + width + depth, y);
     ctx.closePath();
+    ctx.fill();
+    
+    // 褲子側面
+    ctx.fillStyle = pantsSideColor;
+    ctx.beginPath();
+    ctx.moveTo(x, y - depth);
+    ctx.lineTo(x, y - depth + pantsHeight);
+    ctx.lineTo(x + depth, y + pantsHeight);
+    ctx. lineTo(x + depth, y);
+    ctx.closePath();
+    ctx.fill();
+    
+    // 鞋子正面
+    const shoeY = y + pantsHeight;
+    ctx.fillStyle = shoeFrontColor;
+    ctx.fillRect(x + depth, shoeY, width, shoeHeight);
+    
+    // 鞋子頂面
+    ctx.fillStyle = shoeTopColor;
+    ctx.beginPath();
+    ctx.moveTo(x + depth, shoeY);
+    ctx.lineTo(x, shoeY - depth);
+    ctx.lineTo(x + width, shoeY - depth);
+    ctx.lineTo(x + width + depth, shoeY);
+    ctx. closePath();
+    ctx.fill();
+    
+    // 鞋子側面
+    ctx.fillStyle = shoeSideColor;
+    ctx.beginPath();
+    ctx.moveTo(x, shoeY - depth);
+    ctx.lineTo(x, shoeY - depth + shoeHeight);
+    ctx.lineTo(x + depth, shoeY + shoeHeight);
+    ctx.lineTo(x + depth, shoeY);
+    ctx. closePath();
     ctx.fill();
     
     // 邊框
     ctx.strokeStyle = borderColor;
-    ctx.lineWidth = 2;
+    ctx. lineWidth = 2;
     ctx.strokeRect(x + depth, y, width, pantsHeight);
     ctx.strokeRect(x + depth, shoeY, width, shoeHeight);
     
@@ -447,19 +438,19 @@ for (let row = 0; row < 4; row++) {
     ctx.stroke();
     
     ctx.beginPath();
-    ctx.moveTo(x, y - depth);
+    ctx. moveTo(x, y - depth);
     ctx.lineTo(x, y - depth + height);
     ctx.lineTo(x + depth, y + height);
     ctx.lineTo(x + depth, y);
     ctx.closePath();
-    ctx.stroke();
+    ctx. stroke();
 }
 
 // 創建磚塊立方體
 function createBrickCube(event) {
     const rect = canvas.getBoundingClientRect();
     const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
+    const mouseY = event.clientY - rect. top;
     
     let x = mouseX - brickSize / 2;
     let y = mouseY - brickSize / 2;
@@ -482,7 +473,7 @@ function drawBrickCube(x, y, size) {
     const topBrickColor = 'rgb(180, 100, 80)';
     const sideBrickColor = 'rgb(130, 60, 40)';
     const frontMortarColor = 'rgb(180, 180, 180)';
-    const topMortarColor = 'rgb(200, 200, 200)';
+    const topMortarColor = 'rgb(220, 220, 220)'; // ✅ 改為更亮的灰色
     const sideMortarColor = 'rgb(150, 150, 150)';
     const borderColor = 'rgb(180, 180, 180)';
     
@@ -506,13 +497,13 @@ function drawBrickCube(x, y, size) {
     ctx.beginPath();
     ctx.moveTo(x + depth, y);
     ctx.lineTo(x, y - depth);
-    ctx.lineTo(x + size, y - depth);
+    ctx. lineTo(x + size, y - depth);
     ctx.lineTo(x + size + depth, y);
-    ctx.closePath();
+    ctx. closePath();
     ctx.stroke();
     
     // 側面邊框
-    ctx.beginPath();
+    ctx. beginPath();
     ctx.moveTo(x, y - depth);
     ctx.lineTo(x, y - depth + size);
     ctx.lineTo(x + depth, y + size);
@@ -566,7 +557,7 @@ function drawBrickFace(x, y, width, height, brickColor, mortarColor) {
             ctx.fillRect(x + quarterWidth + halfWidth, rowY, quarterWidth, rowHeight);
             
             // 分隔線
-            ctx.strokeStyle = mortarColor;
+            ctx. strokeStyle = mortarColor;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(x + quarterWidth, rowY);
@@ -578,17 +569,17 @@ function drawBrickFace(x, y, width, height, brickColor, mortarColor) {
         
         // 水平分隔線
         if (row > 0) {
-            ctx.strokeStyle = mortarColor;
+            ctx. strokeStyle = mortarColor;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(x, rowY);
-            ctx.lineTo(x + width, rowY);
+            ctx. lineTo(x + width, rowY);
             ctx.stroke();
         }
     }
 }
 
-// 繪製頂面磚塊紋理
+// 繪製頂面磚塊紋理 ✅ 修正版本
 function drawBrickTop(x, y, size, depth, brickColor, mortarColor) {
     // 頂面多邊形點
     const topPoints = [
@@ -600,64 +591,39 @@ function drawBrickTop(x, y, size, depth, brickColor, mortarColor) {
     
     // 繪製頂面背景
     ctx.fillStyle = mortarColor;
-    ctx.beginPath();
+    ctx. beginPath();
     ctx.moveTo(topPoints[0].x, topPoints[0].y);
-    ctx.lineTo(topPoints[1].x, topPoints[1].y);
+    ctx.lineTo(topPoints[1].x, topPoints[1]. y);
     ctx.lineTo(topPoints[2].x, topPoints[2].y);
     ctx.lineTo(topPoints[3].x, topPoints[3].y);
-    ctx.closePath();
+    ctx. closePath();
     ctx.fill();
     
     const patterns = ['full', 'half', 'full', 'half'];
     
-    // 這裡簡化繪製，實際應用中可以根據需要實現更複雜的紋理
     ctx.fillStyle = brickColor;
     for (let row = 0; row < 4; row++) {
         const vStart = row / 4;
         const vEnd = (row + 1) / 4;
+        const pattern = patterns[row];
         
-        for (let col = 0; col < 2; col++) {
-            const pattern = patterns[row];
-            let uStart, uEnd;
-            
-            if (pattern === 'full') {
-                uStart = col / 2;
-                uEnd = (col + 1) / 2;
-            } else {
-                if (col === 0) {
-                    uStart = 0;
-                    uEnd = 0.25;
-                } else if (col === 1) {
-                    uStart = 0.25;
-                    uEnd = 0.75;
-                } else {
-                    continue;
-                }
-            }
-            
-            // 計算頂面磚塊的四個頂點
-            const points = [];
-            for (const [u, v] of [[uStart, vStart], [uEnd, vStart], [uEnd, vEnd], [uStart, vEnd]]) {
-                const px = (1-u)*(1-v)*topPoints[1].x + u*(1-v)*topPoints[2].x + 
-                          u*v*topPoints[3].x + (1-u)*v*topPoints[0].x;
-                const py = (1-u)*(1-v)*topPoints[1].y + u*(1-v)*topPoints[2].y + 
-                          u*v*topPoints[3].y + (1-u)*v*topPoints[0].y;
-                points.push({x: px, y: py});
-            }
-            
-            // 繪製磚塊
-            ctx.beginPath();
-            ctx.moveTo(points[0].x, points[0].y);
-            for (let i = 1; i < points.length; i++) {
-                ctx.lineTo(points[i].x, points[i].y);
-            }
-            ctx.closePath();
-            ctx.fill();
+        if (pattern === 'full') {
+            // 左磚塊
+            drawParametricPolygon(topPoints, 0, 0. 5, vStart, vEnd, brickColor);
+            // 右磚塊
+            drawParametricPolygon(topPoints, 0.5, 1, vStart, vEnd, brickColor);
+        } else {
+            // 左半磚塊
+            drawParametricPolygon(topPoints, 0, 0.25, vStart, vEnd, brickColor);
+            // 中間完整磚塊
+            drawParametricPolygon(topPoints, 0.25, 0.75, vStart, vEnd, brickColor);
+            // 右半磚塊
+            drawParametricPolygon(topPoints, 0.75, 1, vStart, vEnd, brickColor);
         }
     }
 }
 
-// 繪製側面磚塊紋理（簡化版）
+// 繪製側面磚塊紋理
 function drawBrickSide(x, y, size, depth, brickColor, mortarColor) {
     // 側面多邊形點
     const sidePoints = [
@@ -673,14 +639,12 @@ function drawBrickSide(x, y, size, depth, brickColor, mortarColor) {
     ctx.moveTo(sidePoints[0].x, sidePoints[0].y);
     ctx.lineTo(sidePoints[1].x, sidePoints[1].y);
     ctx.lineTo(sidePoints[2].x, sidePoints[2].y);
-    ctx.lineTo(sidePoints[3].x, sidePoints[3].y);
+    ctx. lineTo(sidePoints[3].x, sidePoints[3].y);
     ctx.closePath();
     ctx.fill();
     
-    // 簡化側面磚塊紋理
-    ctx.fillStyle = brickColor;
+    // 側面磚塊紋理
     const patterns = ['full', 'half', 'full', 'half'];
-    const rowHeight = size / 4;
     
     for (let row = 0; row < 4; row++) {
         const pattern = patterns[row];
@@ -688,19 +652,12 @@ function drawBrickSide(x, y, size, depth, brickColor, mortarColor) {
         const vEnd = (row + 1) / 4;
         
         if (pattern === 'full') {
-            const uStart = 0;
-            const uEnd = 0.5;
-            
-            // 繪製磚塊
-            drawParametricPolygon(sidePoints, uStart, uEnd, vStart, vEnd, brickColor);
-            
-            const uStart2 = 0.5;
-            const uEnd2 = 1;
-            drawParametricPolygon(sidePoints, uStart2, uEnd2, vStart, vEnd, brickColor);
+            drawParametricPolygon(sidePoints, 0, 0. 5, vStart, vEnd, brickColor);
+            drawParametricPolygon(sidePoints, 0.5, 1, vStart, vEnd, brickColor);
         } else {
             drawParametricPolygon(sidePoints, 0, 0.25, vStart, vEnd, brickColor);
             drawParametricPolygon(sidePoints, 0.25, 0.75, vStart, vEnd, brickColor);
-            drawParametricPolygon(sidePoints, 0.75, 1, vStart, vEnd, brickColor);
+            drawParametricPolygon(sidePoints, 0. 75, 1, vStart, vEnd, brickColor);
         }
     }
 }
@@ -720,19 +677,19 @@ function drawParametricPolygon(points, uStart, uEnd, vStart, vEnd, color) {
     }
     
     ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.moveTo(vertexPoints[0].x, vertexPoints[0].y);
+    ctx. beginPath();
+    ctx.moveTo(vertexPoints[0]. x, vertexPoints[0]. y);
     for (let i = 1; i < vertexPoints.length; i++) {
         ctx.lineTo(vertexPoints[i].x, vertexPoints[i].y);
     }
-    ctx.closePath();
+    ctx. closePath();
     ctx.fill();
 }
 
 // 更新磚塊大小
 function updateSize() {
     brickSize = parseInt(sizeSlider.value);
-    sizeValue.textContent = brickSize;
+    sizeValue. textContent = brickSize;
 }
 
 // 清除所有磚塊
@@ -753,11 +710,10 @@ function redrawScene() {
     drawCharacter();
     
     // 重新繪製所有磚塊
-    brickCubes.forEach(cube => {
-        drawBrickCube(cube.x, cube.y, cube.size);
+    brickCubes. forEach(cube => {
+        drawBrickCube(cube. x, cube.y, cube. size);
     });
 }
 
 // 初始化遊戲
 window.onload = init;
-
