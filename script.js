@@ -453,8 +453,8 @@ function createBrickCube(event) {
     const mouseY = event.clientY - rect.top;
 
     const depth = brickSize / 3; // 3D 深度
-    let x = mouseX - brickSize/2 - depth;
-    let y = mouseY - brickSize / 2;
+    let x = mouseX - brickSize/2;
+    let y = mouseY;
     
     // 確保不會超出邊界
     // 考慮完整的 3D 物體範圍
@@ -724,5 +724,6 @@ function redrawScene() {
 
 // 初始化遊戲
 window.onload = init;
+
 
 
